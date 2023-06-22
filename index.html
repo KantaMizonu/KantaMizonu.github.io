@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwincss.com"></script>
+    <title>Mon premier pendu</title>
+</head>
+<body>
+
+
+    <h1 class="text-3xl font-bold underline">Mon premier pendu</h1>
+    <h2 class="text-3xl font-bold text-white">Nb Errors : <span id="nb_errors">0</span></h2>
+    <button id="generate" class="bg-gray-200 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded">
+    Play  
+    </button>
+    <div class="container" data-name="">
+        <p id="result" class="flex flex-wrap">    
+        </p>
+    </div>
+    
+
+</body>
+
+
+<script>
+    const words = ["bistouquette", "zezette", "pipette", "crevette", "staline", "antisemite", "gestapo", "abricot", "avocat", "religion", "poire", "pivert", "machouiller", "anus", "fraise", "communiste", "cookie", "wagon", "zebre", "abeille", "digital",  "florence", "maeliss",  "agriculture", "bouteille", "chiante", "macron", "calculatrice", "horions", "facade", "peinture", "anarchiste", "soleil", "faucon", "dictature", "espace", "cornichon", "clavier", "ordinateur", "autiste", "lion", "chien", "chataigne",  "mussolini", "vieux","retraite"];
+
+    const used_words = [];
+
+    let nb_errors = 0;
+
+    let get_random_word = () => {
+        console.log(words, 'vs' , used_words)
+        if (words.length == 0) {
+            // ajoute le nouveau tableau des mots déjà utilisés dans l'ancien tableau des mots définis
+            words.push(...used_words)
+            // vider et séparer les différents mots
+            used_words.splice(0)
+        }
+        let random_index = Math.trunc(Math.random() * words.length)
+        let word = words[random_index]
+        used_words.push(word)
+        words.splice(random_index,1)
+        return word
+    }
+
+ 
+    function select_a_word() {
+        document.body.removeEventListener('keyup', search_if_letter_is_in_word)
+        document.body.addEventListener('keyup', search_if_letter_is_in_word);
+
+        let word = get_random_word();
+        document.querySelector("#result").innerHTML = '';
+
+        console.warn(word)
+        // boucle pour récuperer les lettres dans le mot généré après le click
+        for (letter of word){
+            const newSpan = document.createElement("span");
+            newSpan.classList.add('letter');
+            newSpan.setAttribute('data-letter', letter);
+            document.querySelector("#result").appendChild(newSpan);
+        }
+        
+    }
+
+    function display_nberrors() {
+        document.querySelector('#nb_errors').innerText = nb_errors;
+    }
+
+    document.querySelector('#generate').addEventListener('click', select_a_word);
+
+    let nb_letters_found = 0;
+    let letters_already_pressed = [];
+
+    const search_if_letter_is_in_word = (event) => {
+        let letter_pressed = event.key.toLowerCase();
+
+        let cells = document.querySelectorAll('.letter');
+
+        //je vérifie que ce n'est pas une lettre déjà recherché au préalable
+        if (!letters_already_pressed.includes(letter_pressed)){
+
+            letters_already_pressed.push(letter_pressed)
+
+            let found = false;
+            for (let cell of cells) {
+                if (cell.getAttribute('data-letter') == letter_pressed) {
+                    cell.innerHTML = letter_pressed
+                    found = true
+                    nb_letters_found++
+                }
+            }
+            if (!found) {
+                nb_errors++
+            }
+            
+        }
+
+        console.log(nb_letters_found, "lettres trouvé sur",cells.length)
+        if (nb_letters_found == cells.length) {
+            console.warn("Votre compte en banque a été crédité de 2.000.000 de kamas")
+        }
+  
+        display_nberrors()
+    }
+</script>
+</html>
