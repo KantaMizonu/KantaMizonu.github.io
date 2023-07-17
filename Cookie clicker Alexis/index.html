@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="root.css">
+    <title>Panda</title>
+</head>
+<body>
+    <nav>
+        <menu id="pandanav" class="flex center p-t2 efat gap-2">
+            <li>Bébé Panda nourri : <span id="bebepandanourie"></span> </li>
+            <li>Gros Panda nourri : <span id="grospandanourie"></span>  </li>
+            <li>Kung-fu Panda nourri : <span id="kungfupandanourie"></span>  </li>
+            <li>Ninja Panda nourri : <span id="ninjapandanourie"></span>  </li>
+        </menu>
+    </nav>
+    <main class="flex center align-center w100 p-t10">
+        <div class="flex center align-center w30">
+            <li class="efat">Bambou possédé : <span id="bambou"></span> </li>
+            <div onclick="bamboustack()" class="button bambouclasse"><img src="bamboo.png" alt="" draggable="false"></div>
+            <div onclick="toggleSound()" id="toggleSoundButton"><img src="sound-off.png" alt="Sound"></div>
+        </div>
+        <div class="w30">
+            <div class="flex column align-center">
+                <h3>Sécateur : 20</h3>
+                <button id="secateurs" class="bambooclasse button" onclick="acheterPanda('secateurs', 20)"><img class="pandaimg" src="secateurs.png" alt=""></button>
+            </div>
+            <div class="flex column align-center">
+                <h3>Machette : 30</h3>
+                <button id="machette" class="bambooclasse button" onclick="acheterPanda('machette', 30)"><img class="pandaimg" src="machette.png" alt=""></button>
+            </div>
+            <div class="flex column align-center">
+                <h3>Tronçonneuse : 40</h3>
+                <button id="tronconneuse" class="bambooclasse button" onclick="acheterPanda('tronconneuse', 40)"><img class="pandaimg" src="tronconneuse.png" alt=""></button>
+            </div>
+            <div class="flex column align-center">
+                <h3>Panda travailleur : 40</h3>
+                <button id="pandatravail" class="bambooclasse button"><img class="pandaimg" src="panda--travail.png" alt=""></button>
+            </div>
+        </div>
+        <div class="w30">
+            <div class="flex column align-center">
+                <h3>Bébé Panda : 10</h3>
+                <button id="bbpanda" class="bambooclasse button" >
+                    <img class="pandaimg" src="Bébé-Panda.png" alt="">
+                </button>
+            </div>
+            <div class="flex column align-center">
+                <h3>Gros Panda : 20</h3>
+                <button id="grospanda" class="bambooclasse button" >
+                    <img class="pandaimg" src="Gros-Panda.png" alt="">
+                </button>
+            </div>
+            <div class="flex column align-center">
+                <h3>Kung-fu Panda : 30</h3>
+                <button id="kungfupanda" class="bambooclasse button" >
+                    <img class="pandaimg" src="Kung-fu-Panda.png" alt="">
+                </button>
+            </div>
+            <div class="flex column align-center">
+                <h3>Ninja Panda : 40</h3>
+                <button id="ninjapanda" class="bambooclasse button" >
+                    <img class="pandaimg" src="Ninja-Panda.png" alt="">
+                </button>
+            </div>
+        </div>
+    </main>
+    <audio id="backgroundMusic" loop>
+        <source src="dreamer.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="coupeSound">
+        <source src="coupe.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="pandaSound">
+        <source src="panda.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="epeeSound">
+        <source src="epee.mp3" type="audio/mpeg">
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>
